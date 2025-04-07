@@ -1,16 +1,15 @@
 {
   "name": "e-commerce-angular",
   "version": "0.0.0",
- "scripts": {
-  "ng": "ng",
-  "start": "ng serve",
-  "build": "ng build",
-  "watch": "ng build --watch --configuration development",
-  "test": "ng test",
-  "build:ssr": "ng build && ng run e-commerce-angular:server",
-  "serve:ssr:E-commerce-angular": "node dist/e-commerce-angular/server/server.mjs"
-}
-,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "build:ssr": "ng build && ng run e-commerce-angular:server",
+    "serve:ssr:E-commerce-angular": "node dist/e-commerce-angular/server/server.mjs"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
@@ -22,8 +21,12 @@
     "@angular/platform-server": "^19.2.4",
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.6",
-    "express": "^4.18.2",
+    "@stripe/stripe-js": "^7.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "rxjs": "~7.8.0",
+    "stripe": "^18.0.0",
     "tslib": "^2.3.0",
     "vite": "^6.2.3",
     "zone.js": "~0.15.0"
@@ -32,16 +35,22 @@
     "@angular-devkit/build-angular": "^19.2.5",
     "@angular/cli": "^19.2.5",
     "@angular/compiler-cli": "^19.2.0",
-    "@netlify/angular-runtime": "^2.2.0",
-    "@types/express": "^4.17.17",
+    "@netlify/angular-runtime": "^2.3.1",
+    "@types/express": "^4.17.21",
     "@types/jasmine": "~5.1.0",
-    "@types/node": "^18.18.0",
+    "@types/node": "^18.19.86",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.2"
-  }
+  },
+  "description": "This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

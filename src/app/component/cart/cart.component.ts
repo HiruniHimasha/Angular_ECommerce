@@ -1,6 +1,7 @@
 import { CommonModule} from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { CartService } from '../../service/cart.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class CartComponent  implements OnInit{
 
   public product : any[] = [];
   public grandTotal !: number;
-  constructor(private cartService:CartService){}
+  constructor(private cartService:CartService, private router:Router){}
 
   ngOnInit(): void {
     this.cartService.getProduct()
@@ -31,6 +32,10 @@ export class CartComponent  implements OnInit{
   
   emptyCart(){
     this.cartService.removeAllCart();
+  }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
   }
   }
 

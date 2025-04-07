@@ -34,7 +34,7 @@
                 <td colspan="4"></td>
                 <td><button (click)="emptyCart()"  class="btn btn-danger">Empty Cart</button></td>
                 <td><a href="products" class="btn btn-primary">Shop More</a></td>
-                <td><button class="btn btn-success">Checkout</button></td>
+                <td><button (click)="goToCheckout()" class="btn btn-success">Checkout</button></td>
                 <td><strong>Grand Total : ${{grandTotal}}</strong></td>
             </tr>
             </tbody>
