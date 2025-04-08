@@ -7,7 +7,7 @@ import { CommonEngine } from '@angular/ssr/node';
 import { render } from '@netlify/angular-runtime/common-engine.mjs'; // For CommonEngine integration
 
 const app = express();
-const PORT = 4242;
+const PORT = 4201;
 
 // ✅ Replace with your real Stripe secret key
 const stripe = new Stripe('sk_test_51QcsRtC2AfYWttCeWJnOcYzcv2qHYWXzau5iAVhIsXVDYgcXbWOP1x3pQ49jlDjSHg35suq3ZbuLXckVxUq2DWKK007IbVdFdI', {
