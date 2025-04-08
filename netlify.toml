@@ -1,7 +1,8 @@
 [build]
-  command = "npm run build:ssr"
-  publish = "dist/e-commerce-angular/browser"
+command = "npm run build:ssr"
+publish = "dist/e-commerce-angular/browser"
 
-
-[[plugins]]
-package = "@netlify/angular-runtime"
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/ssr"
+  status = 200

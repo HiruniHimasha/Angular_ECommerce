@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:ssr": "ng build && ng run e-commerce-angular:server",
+    "dev": "ts-node server.ts",
+  "build:ssr": "ng build && ng run e-commerce-angular:server",
     "serve:ssr:E-commerce-angular": "node dist/e-commerce-angular/server/server.mjs"
   },
   "private": true,
