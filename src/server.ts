@@ -1,20 +1,26 @@
 import express, { Request, Response as ExpressResponse } from 'express';
 import Stripe from 'stripe';
 import cors from 'cors';
+import { CommonEngine } from '@angular/ssr/node';  // Netlify SSR dependency
+import { render } from '@netlify/angular-runtime/common-engine.mjs'; // CommonEngine render function
 
 const app = express();
 const PORT = 4242;
 
-// ✅ Fix for TS4111: Use bracket notation
+// ✅ Fix for Netlify: Use the CommonEngine for SSR
+const commonEngine = new CommonEngine();
+
 if (process.env['NETLIFY'] !== 'true') {
+  // ✅ Set up Stripe outside Netlify
   const stripe = new Stripe('sk_test_51QcsRtC2AfYWttCeWJnOcYzcv2qHYWXzau5iAVhIsXVDYgcXbWOP1x3pQ49jlDjSHg35suq3ZbuLXckVxUq2DWKK007IbVdFdI', {
-    // apiVersion intentionally omitted for Angular compatibility
+    // Remove the apiVersion to avoid the TypeScript error
+    // apiVersion: '2023-10-16',
   });
 
   app.use(cors());
   app.use(express.json());
 
-  // ✅ Fix for TS7030: Ensure all code paths return
+  // Stripe Payment Intent API
   app.post('/create-payment-intent', async (req: Request, res: ExpressResponse) => {
     const { amount } = req.body;
 
@@ -35,10 +41,25 @@ if (process.env['NETLIFY'] !== 'true') {
       res.status(500).json({ error: err.message });
     }
 
-    return; // ✅ Return here to satisfy TS7030
+    return;
   });
 
   app.listen(PORT, () => {
     console.log(`✅ Stripe backend running at http://localhost:${PORT}`);
   });
 }
+
+// Netlify SSR - CommonEngine integration for Angular SSR
+export async function netlifyCommonEngineHandler(request: Request, context: any): Promise<ExpressResponse> {
+  const result = await render(commonEngine);
+  
+  // Cast the result to `unknown` first, then to `ExpressResponse`
+  return result as unknown as ExpressResponse; // Double cast to ensure compatibility
+}
+
+// Handle SSR request
+app.all('*', (req, res) => {
+  netlifyCommonEngineHandler(req, res)
+    .then((result) => res.send(result))
+    .catch((err) => res.status(500).send({ error: err.message }));
+});
